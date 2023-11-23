@@ -21,6 +21,7 @@ export const TaskList = ({ tasks, onTaskCompleted, onTaskDeleted }) => {
               {tasks.map((task) => (
                 <TaskItem
                   key={task.id}
+                  
                   task={task}
                   onTaskCompleted={onTaskCompleted}
                   onTaskDeleted={onTaskDeleted}

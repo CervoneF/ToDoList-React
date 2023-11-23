@@ -5,16 +5,17 @@ import Swal from 'sweetalert2';
 
 export const TaskItem = ({ task, onTaskCompleted, onTaskDeleted }) => {
 
-  const [completed, setCompleted] = useState(false);
-
+  const [completedState, setCompleted] = useState(task.completed);
+  console.log ("completed? " + completedState)
+  console.log ("id: " + task.id + " nombre: " + task.name + " completo? " + task.completed)
 
   const handleComplete = () => {
 
-    setCompleted(!completed);
+    setCompleted(!completedState);
     onTaskCompleted(task.id);
 
 
-    const title = completed ? 'sin completar' : 'completada';
+    const title = completedState ? 'sin completar' : 'completada';
 
 
     Swal.fire({
@@ -33,22 +34,22 @@ export const TaskItem = ({ task, onTaskCompleted, onTaskDeleted }) => {
 
   useEffect(() => {
 
-    console.log(`Se cambió el estado de la tarea ${task.name} a ${completed}`);
-  }, [completed]);
+    console.log(`Se cambió el estado de la tarea ${task.name} a ${completedState}`);
+  }, [completedState]);
 
 
   return (
     
     <tr style={{
-      textDecoration: completed ? 'line-through' : 'none',
-      fontWeight: completed ? 'normal' : 'bold'
+      textDecoration: completedState ? 'line-through' : 'none',
+      fontWeight: completedState ? 'normal' : 'bold'
     }}>
       <td className="text-center">{task.name}</td>
 
       <td className="text-center" >
 
         <button onClick={handleComplete}>
-          {completed ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square-check"></i>}
+          {completedState ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square-check"></i>}
         </button>
 
         <button
